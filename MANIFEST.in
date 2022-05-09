@@ -1,0 +1,2 @@
+include netconfdriver/pkg_info.json
+include netconfdriver/config/*.yml

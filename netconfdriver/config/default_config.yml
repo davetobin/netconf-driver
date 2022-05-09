@@ -1,0 +1,6 @@
+---
+application:
+  port: 7139
+
+messaging:
+  connection_address: cp4na-o-events-kafka-bootstrap:9092

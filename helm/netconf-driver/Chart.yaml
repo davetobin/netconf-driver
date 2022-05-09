@@ -1,0 +1,13 @@
+name: netconf-driver
+version: 0.0.1
+appVersion: 0.0.1
+apiVersion: v1
+description: A Helm chart for netconf-driver
+keywords:
+- LM
+- Resource Manager
+- Brent
+- Driver
+- netconf-driver
+- netconf-driver
+engine: gotpl
