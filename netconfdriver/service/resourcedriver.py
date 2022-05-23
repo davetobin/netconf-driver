@@ -1,14 +1,12 @@
 from ignition.model.lifecycle import LifecycleExecuteResponse, LifecycleExecution, STATUS_COMPLETE
 from ignition.service.framework import Service
-from ignition.service.resourcedriver import ResourceDriverHandlerCapability, ResourceDriverError
+from ignition.service.resourcedriver import ResourceDriverHandlerCapability, ResourceDriverError, InvalidRequestError
 from ignition.service.framework import Service
 from netconfdriver.service.location.deployment_location import *
 from netconfdriver.service import jinja_conversion
 import netconfdriver.service.common as common
-from netconfdriver.service.configuration.configuration import *
+from netconfdriver.service.operations.config_operations import *
 import os
-
-RESULT_SUCCESS = 'SUCCESS'
 
 logger = logging.getLogger(__name__)
 
@@ -36,8 +34,8 @@ class ResourceDriverHandler(Service, ResourceDriverHandlerCapability):
         netconf_location = None
         
         try:
-            logger.debug(f'lifecycle_name:{lifecycle_name},driver_files:{driver_files},deployment_location:{deployment_location}')
-            logger.debug(f'resource_properties:{resource_properties},request_properties:{request_properties},associated_topology: {associated_topology}')
+            logger.info(f'lifecycle_name:{lifecycle_name},driver_files:{driver_files},deployment_location:{deployment_location}')
+            logger.info(f'resource_properties:{resource_properties},request_properties:{request_properties},associated_topology: {associated_topology}')
             netconf_location = NetConfDeploymentLocation.from_dict(deployment_location)
             method_name = lifecycle_name.lower()
             if(method_name == 'upgrade'):
@@ -45,7 +43,7 @@ class ResourceDriverHandler(Service, ResourceDriverHandlerCapability):
             package_properties = jinja_conversion.from_pkg(resource_properties, driver_files, method_name)
             if package_properties is None:
                 raise ResourceDriverError('Templating Exception')
-            logger.debug('package_properties : %s', package_properties)
+            logger.info('package_properties : %s', package_properties)
             default_operation = jinja_conversion.to_string(resource_properties)
             if method_name == 'delete' and default_operation == 'replace':
                 default_operation = 'none'
@@ -55,11 +53,15 @@ class ResourceDriverHandler(Service, ResourceDriverHandlerCapability):
             logger.debug('rsa_key_path : %s', rsa_key_path)
             if rsa_key_path is None:
                 raise ResourceDriverError('RSA private key Exception')
-            netconf_location.connect(package_properties,default_operation,rsa_key_path)
+            request_id = common.build_request_id(method_name)
+            logger.info('REQUEST: %s :- Before Executing Operation', request_id)
+            edit_config_details = netconf_location.operation(package_properties,default_operation,rsa_key_path)
+            logger.info('RESPONSE: %s :- After Executing Operation , Result : %s', request_id, edit_config_details)
         except NetconfConfigError as e:
+            raise InvalidRequestError(str(e)) from e
+        except jinja_conversion.PropertyError as e:
             raise ResourceDriverError(str(e)) from e
-        finally:
-            request_id = common.build_request_id(method_name, result=RESULT_SUCCESS)
+        else:
             os.unlink(rsa_key_path)
             return LifecycleExecuteResponse(request_id)
 

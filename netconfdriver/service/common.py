@@ -13,11 +13,9 @@ FAILURE_RESULT = 'Failure'
 REQUEST_ID_SEPARATOR = '::'
 
 
-def build_request_id(method_name, result):
+def build_request_id(method_name):
     if method_name == CREATE_REQUEST_PREFIX.lower():
         request_id = CREATE_REQUEST_PREFIX
-        request_id += REQUEST_ID_SEPARATOR
-        request_id += result
         request_id += REQUEST_ID_SEPARATOR
         request_id += str(uuid.uuid4())
         return request_id
@@ -25,15 +23,11 @@ def build_request_id(method_name, result):
     if method_name == DELETE_REQUEST_PREFIX.lower():
         request_id = DELETE_REQUEST_PREFIX
         request_id += REQUEST_ID_SEPARATOR
-        request_id += result
-        request_id += REQUEST_ID_SEPARATOR
         request_id += str(uuid.uuid4())
         return request_id
     
     if method_name == UPDATE_REQUEST_PREFIX.lower():
         request_id = UPDATE_REQUEST_PREFIX
-        request_id += REQUEST_ID_SEPARATOR
-        request_id += result
         request_id += REQUEST_ID_SEPARATOR
         request_id += str(uuid.uuid4())
         return request_id
