@@ -1,10 +1,10 @@
 import unittest
 import logging
 import os
-from unittest.mock import patch, MagicMock, Mock
+from unittest.mock import patch
 from netconfdriver.service.resourcedriver import ResourceDriverHandler
 from netconfdriver.service.location.deployment_location import NetConfDeploymentLocation
-from netconfdriver.service.configuration.configuration import Configuration
+from netconfdriver.service.operations.config_operations import ConfigOperations
 import netconfdriver.service.jinja_conversion as jinja_conversion
 import netconfdriver.service.common as common
 from ignition.utils.file import DirectoryTree
@@ -29,10 +29,12 @@ class TestLifecycleController(unittest.TestCase):
         
     def __resource_properties(self):
         props = {}
-        props['netconfId'] = {'type': 'string', 'value': '500'}
+        props['config_list_map'] = {'type': 'list', 'value': [{'netconfId': 500},{'netconfParam': 100}]}
         props['netconfParam'] = {'type': 'string', 'value': '100'}
+        props['netconfId'] = {'type': 'string', 'value': '500'}
+        props['config_map'] = {'type': 'map', 'value': {'netconfParam': 100,'netconfId': 500}}
         props['defaultOperation'] = {'type': 'string', 'value': 'merge'}
-        props['privateSshKey'] = {'type': 'key', 'keyName': 'test_key', 'privateKey': '***obfuscated private key***\\n', 'value': 'test_key'}
+        props['infraKey'] = {'type': 'key', 'keyName': 'test_key', 'privateKey': '***obfuscated private key***\\n', 'value': 'test_key'}
         return PropValueMap(props)
         
     def __deployment_location(self):
@@ -81,7 +83,7 @@ class TestLifecycleController(unittest.TestCase):
             self.assertEqual(template_content,EXPECTED_CONTENT_UPDATE)
         
 
-    @patch.object(Configuration, 'netconf_connect')
+    @patch.object(ConfigOperations, 'netconf_connect')
     def test_driver(self,mock_request):
         system_properties = {}
         request_properties = self.__request_properties()

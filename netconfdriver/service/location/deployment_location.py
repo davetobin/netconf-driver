@@ -2,7 +2,7 @@ import logging
 from ignition.utils.propvaluemap import PropValueMap
 from ignition.locations.exceptions import InvalidDeploymentLocationError
 from ignition.locations.utils import get_property_or_default
-from netconfdriver.service.configuration.configuration import *
+from netconfdriver.service.operations.config_operations import *
 
 logger = logging.getLogger(__name__)
 
@@ -75,10 +75,11 @@ class NetConfDeploymentLocation:
             NetConfDeploymentLocation.TIMEOUT: self.timeout,
         }
 
-    def connect(self,package_properties,default_operation,rsa_key_path):
-        response = Configuration.netconf_connect(self.host, self.port, self.username, self.password, rsa_key_path, self.kwargs)
-        Configuration.netconf_edit(response,package_properties,default_operation)
-        Configuration.netconf_disconnect(response)
+    def operation(self,package_properties,default_operation,rsa_key_path):
+        response = ConfigOperations.netconf_connect(self.host, self.port, self.username, self.password, rsa_key_path, self.kwargs)
+        edit_config_details = ConfigOperations.netconf_edit(response,package_properties,default_operation)
+        ConfigOperations.netconf_disconnect(response)
+        return edit_config_details
 
     def close(self):
         pass

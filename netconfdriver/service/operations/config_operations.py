@@ -6,7 +6,7 @@ logger = logging.getLogger(__name__)
 class NetconfConfigError(Exception):
     pass
 
-class Configuration():
+class ConfigOperations():
     def netconf_connect(host, port, user, password,rsa_key_path,kwargs):
         logger.debug(f'host:{host},port:{port},user:{user},password:{password},rsa_key_path:{rsa_key_path},kwargs:{kwargs}')
         try:
@@ -29,6 +29,7 @@ class Configuration():
         try:
             edit_config_details = conn.edit_config(config=package_properties, target="running", default_operation=default_operation)
             logger.debug('config_details = %s', edit_config_details)
+            return edit_config_details
         except Exception as e:
             logger.error('Unexpected exception {0}'.format(e))
             raise NetconfConfigError(str(e)) from e
