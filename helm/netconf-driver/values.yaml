@@ -46,7 +46,7 @@ app:
   
     security:
       ssl:
-        enabled: False
+        enabled: True
         secret:
           ## Name of the secret containing the SSL certificate for the non-host based access (the CN of the certificate should match commonName)
           name: netconf-driver-tls
