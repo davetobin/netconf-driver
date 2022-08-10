@@ -1,5 +1,4 @@
-from ignition.model.failure import FAILURE_CODE_INTERNAL_ERROR, FailureDetails
-from ignition.model.lifecycle import STATUS_FAILED, LifecycleExecuteResponse, LifecycleExecution, STATUS_COMPLETE
+from ignition.model.lifecycle import LifecycleExecuteResponse, LifecycleExecution, STATUS_COMPLETE
 from ignition.service.framework import Service
 from ignition.service.resourcedriver import ResourceDriverHandlerCapability, ResourceDriverError, InvalidRequestError
 from ignition.service.framework import Service
@@ -33,10 +32,6 @@ class ResourceDriverHandler(Service, ResourceDriverHandlerCapability):
             ignition.service.resourcedriver.ResourceDriverError: there was an error handling this request
         """
         netconf_location = None
-
-        # setting default status as FAILED, if lifecycle gets successful then it is updated to SUCCESS
-        with open('lifecycle_status', 'w') as output:
-            output.write('FAILED')
         
         try:
             logger.info(f'lifecycle_name:{lifecycle_name},driver_files:{driver_files},deployment_location:{deployment_location}')
@@ -60,24 +55,14 @@ class ResourceDriverHandler(Service, ResourceDriverHandlerCapability):
                 raise ResourceDriverError('RSA private key Exception')
             request_id = common.build_request_id(method_name)
             logger.info('REQUEST: %s :- Before Executing Operation', request_id)
-            edit_config_details = netconf_location.operation(package_properties,default_operation,rsa_key_path)
+            edit_config_details = netconf_location.operation(package_properties,default_operation,rsa_key_path,request_id)
             logger.info('RESPONSE: %s :- After Executing Operation , Result : %s', request_id, edit_config_details)
         except NetconfConfigError as e:
-            failure_reason = f'Error related to Netconf Connection or Configuration. {e}'
-            logger.exception(failure_reason)            
-            with open('lifecycle_failure_reason', 'w') as output:
-                output.write(failure_reason)
-            return LifecycleExecution(request_id, STATUS_FAILED, FailureDetails(FAILURE_CODE_INTERNAL_ERROR, failure_reason), outputs={})
+            raise InvalidRequestError(str(e)) from e
         except jinja_conversion.PropertyError as e:
-            failure_reason = f'Error related to jinja_conversion. {e}'
-            logger.exception(failure_reason)            
-            with open('lifecycle_failure_reason', 'w') as output:
-                output.write(failure_reason)
-            return LifecycleExecution(request_id, STATUS_FAILED, FailureDetails(FAILURE_CODE_INTERNAL_ERROR, failure_reason), outputs={})
+            raise ResourceDriverError(str(e)) from e
         else:
             os.unlink(rsa_key_path)
-            with open('lifecycle_status', 'w') as output:
-                output.write('SUCCESS')
             return LifecycleExecuteResponse(request_id)
 
     def get_lifecycle_execution(self, request_id, deployment_location):
@@ -91,17 +76,8 @@ class ResourceDriverHandler(Service, ResourceDriverHandlerCapability):
             ignition.service.resourcedriver.TemporaryResourceDriverError: there is an issue handling this request at this time, an attempt should be made again at a later time
             ignition.service.resourcedriver.ResourceDriverError: there was an error handling this request
         """
-        status = ''
-        with open('lifecycle_status', 'r') as output:
-            status = output.read()
-            logger.info(f'lifecycle execution status : {status}')
-        if(status == 'SUCCESS'):
-            return LifecycleExecution(request_id, STATUS_COMPLETE, failure_details=None, outputs={})
-        else:
-            failure_reason = ''
-            with open('lifecycle_failure_reason', 'r') as output:
-                failure_reason = output.read()
-            return LifecycleExecution(request_id, STATUS_FAILED, FailureDetails(FAILURE_CODE_INTERNAL_ERROR, failure_reason), outputs={})
+
+        return LifecycleExecution(request_id, STATUS_COMPLETE, failure_details=None, outputs={})
 
     def find_reference(self, instance_name, driver_files, deployment_location):
         """
