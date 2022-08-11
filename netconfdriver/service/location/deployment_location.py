@@ -75,9 +75,9 @@ class NetConfDeploymentLocation:
             NetConfDeploymentLocation.TIMEOUT: self.timeout,
         }
 
-    def operation(self,package_properties,default_operation,rsa_key_path):
+    def operation(self,package_properties,default_operation,rsa_key_path,request_id):
         response = ConfigOperations.netconf_connect(self.host, self.port, self.username, self.password, rsa_key_path, self.kwargs)
-        edit_config_details = ConfigOperations.netconf_edit(response,package_properties,default_operation)
+        edit_config_details = ConfigOperations.netconf_edit(response,package_properties,default_operation,request_id)
         ConfigOperations.netconf_disconnect(response)
         return edit_config_details
 

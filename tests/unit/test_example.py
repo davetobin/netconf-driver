@@ -84,7 +84,8 @@ class TestLifecycleController(unittest.TestCase):
         
 
     @patch.object(ConfigOperations, 'netconf_connect')
-    def test_driver(self,mock_request):
+    @patch.object(ConfigOperations, '_generate_additional_logs')
+    def test_driver(self,mock_request, mock_logs):
         system_properties = {}
         request_properties = self.__request_properties()
         deployment_location = self.__deployment_location()
@@ -100,3 +101,4 @@ class TestLifecycleController(unittest.TestCase):
                                     system_properties, resource_properties, 
                                     request_properties, associated_topology, deployment_location)
             mock_request.assert_called()
+            assert ConfigOperations._generate_additional_logs.called
