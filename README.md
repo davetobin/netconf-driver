@@ -72,4 +72,4 @@ infraKey:
 
 ## Onboarding Netconf driver
 
-For information on how to onboard Netconf driver to a CP4NA cluster, please see the guide [Onboarding Guide](docs/Onboarding.md)
+For information on how to onboard Netconf driver to a CP4NA cluster, please see [Onboarding Guide](docs/Onboarding.md)
