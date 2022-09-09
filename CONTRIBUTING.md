@@ -14,6 +14,8 @@
 - Manoj Natarajan [@manojn94](https://github.com/manojn94)
 - Lokanadham Nalla [@lokanalla](https://github.com/lokanalla)
 - Hari Krishna [@HariKrishna1-ibm](https://github.com/HariKrishna1-ibm)
+- Haynes Davis [@haynesdavis](https://github.com/haynesdavis)
+
 
 ## Reporting Issues
 

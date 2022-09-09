@@ -68,3 +68,8 @@ infraKey:
 ```
 
 - Once the Infrastructure key is created, make sure to add its name in resource properties under 'infraKey' while creating an instance in cp4na
+
+
+## Onboarding Netconf driver
+
+For information on how to onboard Netconf driver to a CP4NA cluster, please see the guide [Onboarding Guide](docs/Onboarding.md)
