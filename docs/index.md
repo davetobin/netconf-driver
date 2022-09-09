@@ -7,7 +7,7 @@ None
 Install netconf-driver using Helm:
 
 ```
-helm install netconf-driver netconf-driver-0.0.1.tgz
+helm install netconf-driver netconf-driver-<version>.tgz
 ```
 
 Add configuration through a custom Helm values file:

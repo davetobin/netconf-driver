@@ -17,7 +17,7 @@ setup(
     include_package_data=True,
     install_requires=[
         'gunicorn==20.1.0',
-        'lxml==4.8.0',
+        'lxml==4.9.1',
         'paramiko==2.10.3',
         'ignition-framework=={0}'.format(_pkg_info['ignition-version'])
     ],

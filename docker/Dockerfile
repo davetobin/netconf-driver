@@ -1,4 +1,4 @@
-FROM python:3.7-alpine
+FROM python:3.10-alpine
 
 ARG DRIVER_PORT
 ENV DRIVER_PORT ${DRIVER_PORT:-7139}
@@ -27,4 +27,5 @@ WORKDIR /home/netconfdriver
 
 EXPOSE 7139
 
-CMD gunicorn -w $NUM_PROCESSES -b :$DRIVER_PORT "netconfdriver:create_wsgi_app()"
+CMD if [ $SSL_ENABLED | tr [:upper:] [:lower:] == "true" ]; then SSL="--certfile /var/netconfdriver/certs/tls.crt --keyfile /var/netconfdriver/certs/tls.key" ; fi \
+&& gunicorn --workers $NUM_PROCESSES --bind [::]:$DRIVER_PORT $SSL "netconfdriver:create_wsgi_app()"
