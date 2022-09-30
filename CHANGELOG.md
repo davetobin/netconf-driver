@@ -1,5 +1,10 @@
 # Change Log
 
+## [0.1.1](https://github.com/IBM/netconf-driver/tree/0.1.1) (2022-09-30)
+[Full Changelog](https://github.com/IBM/netconf-driver/compare/0.1.0...0.1.1)
+
+- Update Ignition version to latest 3.4.1 [\#29](https://github.com/IBM/netconf-driver/issues/29)
+
 ## [0.1.0](https://github.com/IBM/netconf-driver/tree/0.1.0) (2022-09-09)
 [Full Changelog](https://github.com/IBM/netconf-driver/compare/0.0.2...0.1.0)
 
