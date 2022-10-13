@@ -56,7 +56,7 @@ class ResourceDriverHandler(Service, ResourceDriverHandlerCapability):
                 raise ResourceDriverError('RSA private key Exception')
             request_id = common.build_request_id(method_name)
             logger.info('REQUEST: %s :- Before Executing Operation', request_id)
-            edit_config_details = netconf_location.operation(package_properties,default_operation,rsa_key_path)
+            edit_config_details = netconf_location.operation(package_properties,default_operation,rsa_key_path,request_id)
             logger.info('RESPONSE: %s :- After Executing Operation , Result : %s', request_id, edit_config_details)
         except NetconfConfigError as e:
             failure_reason = f'Error related to Netconf Connection or Configuration. {e}'
