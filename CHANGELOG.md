@@ -1,5 +1,10 @@
 # Change Log
 
+## [0.1.2](https://github.com/IBM/netconf-driver/tree/0.1.2) (2022-11-21)
+[Full Changelog](https://github.com/IBM/netconf-driver/compare/0.1.1...0.1.2)
+
+- Add error handling in netconf driver [\#11](https://github.com/IBM/netconf-driver/issues/11)
+
 ## [0.1.1](https://github.com/IBM/netconf-driver/tree/0.1.1) (2022-09-30)
 [Full Changelog](https://github.com/IBM/netconf-driver/compare/0.1.0...0.1.1)
 
