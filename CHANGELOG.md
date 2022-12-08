@@ -1,5 +1,10 @@
 # Change Log
 
+## [0.1.3](https://github.com/IBM/netconf-driver/tree/0.1.3) (2022-12-08)
+[Full Changelog](https://github.com/IBM/netconf-driver/compare/0.1.2...0.1.3)
+
+- Fix Vulnerability  [\#39](https://github.com/IBM/netconf-driver/issues/39)
+
 ## [0.1.2](https://github.com/IBM/netconf-driver/tree/0.1.2) (2022-11-21)
 [Full Changelog](https://github.com/IBM/netconf-driver/compare/0.1.1...0.1.2)
 
