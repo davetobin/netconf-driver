@@ -68,7 +68,8 @@ class ConfigOperations():
             if e.type == None:
                     exception_error_type = ''
             else:
-                exception_error_type = e.type    
+                exception_error_type = e.type  
+                  
             ConfigOperations._generate_additional_logs(e, 'received', external_request_id, 'plain/text',
                                        'response', 'netconf', {'error-tag' : exception_error_tag,'error-info' : exception_error_info,'error-severity' : exception_error_severity,'error-path' : exception_error_path,'error-type' : exception_error_type}, request_id)
             logger.error('Unexpected exception {0}'.format(e))
