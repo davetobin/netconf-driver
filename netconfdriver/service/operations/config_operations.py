@@ -72,7 +72,7 @@ class ConfigOperations():
     def _generate_additional_logs(message_data, message_direction, external_request_id,content_type,
                                   message_type, protocol, protocol_metadata, driver_request_id):
         try:
-            logging_context_dict = {'message_direction' : message_direction, 'tracectx.externalrequestid' : external_request_id,
+            logging_context_dict = {'message_direction' : message_direction, 'tracectx.externalrequestid' : external_request_id, 'content_type' : content_type,
                                     'message_type' : message_type, 'protocol' : protocol, 'protocol_metadata' : str(protocol_metadata).replace("'", '\"'), 'tracectx.driverrequestid' : driver_request_id}
             logging_context.set_from_dict(logging_context_dict)
             logger.info(str(message_data).replace("'",'\"'))
@@ -81,6 +81,8 @@ class ConfigOperations():
                 logging_context.data.pop("message_direction")
             if('tracectx.externalrequestid' in logging_context.data):
                 logging_context.data.pop("tracectx.externalrequestid")
+            if('content_type' in logging_context.data):
+                logging_context.data.pop("content_type")   
             if('message_type' in logging_context.data):
                 logging_context.data.pop("message_type")
             if('protocol' in logging_context.data):
