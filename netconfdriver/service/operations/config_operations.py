@@ -33,43 +33,29 @@ class ConfigOperations():
             ConfigOperations._generate_additional_logs(package_properties, 'sent', external_request_id, 'application/xml',
                                        'request', 'netconf', {'default-operation' : default_operation}, request_id)
             edit_config_details = conn.edit_config(config=package_properties, target="running", default_operation=default_operation)
-            response_err = ""
-            if edit_config_details.error == None:
-                    response_err =''
-            else:
-                response_err = edit_config_details.error
-             
+            response_err = ''
+            if edit_config_details.error != None:
+                response_err = edit_config_details.error          
             ConfigOperations._generate_additional_logs(edit_config_details, 'received', external_request_id, 'application/xml',
                                        'response', 'netconf', {'error' : response_err,'errors' : edit_config_details.errors,'ok' : edit_config_details.ok }, request_id)
             logger.debug('config_details = %s', edit_config_details)
             return edit_config_details
         except Exception as e:
-            exception_error_tag = ""
-            if e.tag == None:
-                    exception_error_tag = ''
-            else:
+            exception_error_tag = ''
+            if e.tag != None:   
                 exception_error_tag = e.tag
-            exception_error_info = ""
-            if e.info == None:
-                    exception_error_info = ''
-            else:
-                exception_error_info = e.info  
-            exception_error_severity = ""
-            if e.severity == None:
-                    exception_error_severity = ''
-            else:
+            exception_error_info = ''
+            if e.info != None:
+                exception_error_info = e.info
+            exception_error_severity = ''
+            if e.severity != None:
                 exception_error_severity = e.severity 
-            exception_error_path = ""
-            if e.path == None:
-                    exception_error_path = ''
-            else:
+            exception_error_path = ''
+            if e.path != None:
                 exception_error_path = e.path
-            exception_error_type = ""
-            if e.type == None:
-                    exception_error_type = ''
-            else:
-                exception_error_type = e.type  
-                  
+            exception_error_type = ''
+            if e.type != None:
+                exception_error_type = e.type 
             ConfigOperations._generate_additional_logs(e, 'received', external_request_id, 'plain/text',
                                        'response', 'netconf', {'error-tag' : exception_error_tag,'error-info' : exception_error_info,'error-severity' : exception_error_severity,'error-path' : exception_error_path,'error-type' : exception_error_type}, request_id)
             logger.error('Unexpected exception {0}'.format(e))
