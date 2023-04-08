@@ -1,5 +1,12 @@
 # Change Log
 
+## [0.1.4](https://github.com/IBM/netconf-driver/tree/0.1.4) (2022-04-08)
+[Full Changelog](https://github.com/IBM/netconf-driver/compare/0.1.3...0.1.4)
+
+- Fix security vulnerabilities [\#46](https://github.com/IBM/netconf-driver/issues/46)
+- Resolve logging issues in Netconf-drivers [\#47](https://github.com/IBM/netconf-driver/issues/47)
+
+
 ## [0.1.3](https://github.com/IBM/netconf-driver/tree/0.1.3) (2022-12-08)
 [Full Changelog](https://github.com/IBM/netconf-driver/compare/0.1.2...0.1.3)
 
