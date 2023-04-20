@@ -1,12 +1,5 @@
 # Change Log
 
-## [0.2.0](https://github.com/IBM/netconf-driver/tree/0.2.0) (2022-04-20)
-[Full Changelog](https://github.com/IBM/netconf-driver/compare/0.1.4...0.2.0)
-
-- Remove or mask sensitive information from application logs [\#51](https://github.com/IBM/netconf-driver/issues/51)
-- Update Ignition to latest version 3.5.1 [\#54](https://github.com/IBM/netconf-driver/issues/54)
-
-
 ## [0.1.4](https://github.com/IBM/netconf-driver/tree/0.1.4) (2022-04-08)
 [Full Changelog](https://github.com/IBM/netconf-driver/compare/0.1.3...0.1.4)
 
