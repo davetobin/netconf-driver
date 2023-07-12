@@ -4,6 +4,7 @@
 [Full Changelog](https://github.com/IBM/netconf-driver/compare/0.2.0...0.2.1)
 
 - Fix security vulnerabilities [\#65](https://github.com/IBM/netconf-driver/issues/65)
+- Build the netconf-driver with 'rc' tag [\#62](https://github.com/IBM/netconf-driver/issues/62)
 
 ## [0.2.0](https://github.com/IBM/netconf-driver/tree/0.2.0) (2023-04-20)
 [Full Changelog](https://github.com/IBM/netconf-driver/compare/0.1.4...0.2.0)
