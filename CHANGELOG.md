@@ -1,5 +1,12 @@
 # Change Log
 
+## [0.2.1](https://github.com/IBM/netconf-driver/tree/0.2.1) (2023-07-27)
+[Full Changelog](https://github.com/IBM/netconf-driver/compare/0.2.1-rc2...0.2.1)
+
+- Update Ignition with latest version 3.5.2 [\#67](https://github.com/IBM/netconf-driver/issues/67)
+- Fix security vulnerabilities [\#65](https://github.com/IBM/netconf-driver/issues/65)
+- Build the netconf-driver with 'rc' tag [\#62](https://github.com/IBM/netconf-driver/issues/62)
+
 ## [0.2.1-rc2](https://github.com/IBM/netconf-driver/tree/0.2.1-rc2) (2023-07-26)
 [Full Changelog](https://github.com/IBM/netconf-driver/compare/0.2.1-rc1...0.2.1-rc2)
 
