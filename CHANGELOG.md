@@ -1,5 +1,10 @@
 # Change Log
 
+## [0.3.0](https://github.com/IBM/netconf-driver/tree/0.3.0) (2023-08-17)
+[Full Changelog](https://github.com/IBM/netconf-driver/compare/0.2.1...0.3.0)
+
+- Flexibility to update candidate or running datastore of netconf server [\#64](https://github.com/IBM/netconf-driver/issues/64)
+
 ## [0.2.1](https://github.com/IBM/netconf-driver/tree/0.2.1) (2023-07-27)
 [Full Changelog](https://github.com/IBM/netconf-driver/compare/0.2.1-rc2...0.2.1)
 
