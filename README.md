@@ -6,7 +6,7 @@ CP4NA supports integration of netconf devices using Netconf-Driver.
 Netconf driver implements following lifecycle methods to operate network configurations of a network device.
 
 	1. Create
-	2. Update
+	2. Upgrade
 	3. Delete
 
 -  It uses Ignition framework (https://github.com/IBM/ignition) to communicate 
@@ -20,15 +20,15 @@ Netconf driver implements following lifecycle methods to operate network configu
 	with default-operation as one of ‘merge’, ‘replace’ or ‘none’.
 
 -  Resource properties can pass the default-operation property value as ‘merge’ or ‘replace’ 
-      for Create and Update lifecycles. For Delete lifecycle 'none' is used by default.
+      for Create and Upgrade lifecycles. For Delete lifecycle 'none' is used by default.
 	
 ## Configuration
 
--  Configuration details for the Create/Update/Delete lifecycle methods are passed through xml template files 
+-  Configuration details for the Create/Upgrade/Delete lifecycle methods are passed through xml template files 
 	as part of the resource package as follows.
 
 	  1. For Create lifecycle, create.xml  
-	  2. For Update lifecycle, update.xml
+	  2. For Upgrade lifecycle, update.xml
 	  3. For Delete lifecycle, delete.xml
 
 -  For each lifecycle, configurations are generated in the driver by parsing the properties in the corresponding 
@@ -48,15 +48,20 @@ For example:
 - Following deployment location properties will have the values for connecting to the Netconf server:
 
 ```
-	{
-			"host": "9.30.XX.XX",
-			"port": "830",
-			"username": "netconf",
-			"password": "netconf",
-			"timeout": 30
-	}
+{
+	"host": "9.30.XX.XX",
+	"port": "830",
+	"username": "netconf",
+	"password": "netconf",
+	"timeout": 30,
+	"target": "running"
+}
 ```
-
+```
+Note: 
+   1. candidate or startup datastore type can be specified as target in the deployment location
+   2. By default target uses running datastore type, if no value specified or any other value specified
+```
 - For ssh communication with the network device, the ssh keys must be added to Brent using Infrastructure Keys: https://www.ibm.com/docs/en/cloud-paks/cp-network-auto/2.2.x?topic=using-infrastructure-keys
 
 - In the resource package, in the resource.yaml file , make sure to add a property 'infraKey' with type as 'key' and push the resource package to cp4na. Example shown below : 
