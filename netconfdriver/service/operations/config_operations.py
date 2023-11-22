@@ -61,18 +61,18 @@ class ConfigOperations():
             logger.error('Unexpected exception {0}'.format(e))
             raise NetconfConfigError(str(e)) from e
         
-    def netconf_lock(conn):
+    def netconf_lock(conn, target):
         try:
             logger.debug('Applied lock before updating the configurations ...')
-            conn.lock()
+            conn.lock(target)
         except Exception as e:
             logger.error('Unexpected exception {0}'.format(e))
             raise NetconfConfigError(str(e)) from e   
              
-    def netconf_unlock(conn):
+    def netconf_unlock(conn, target):
         try:
             logger.debug('Unlocking the configurations after the commit ...')
-            conn.unlock()
+            conn.unlock(target)
         except Exception as e:
             logger.error('Unexpected exception {0}'.format(e))
             raise NetconfConfigError(str(e)) from e
