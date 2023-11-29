@@ -1,5 +1,10 @@
 # Change Log
 
+## [0.3.1](https://github.com/IBM/netconf-driver/tree/0.3.1) (2023-11-29)
+[Full Changelog](https://github.com/IBM/netconf-driver/compare/0.3.0...0.3.1)
+
+- Lock/Unlock operations require target parameter [\#81](https://github.com/IBM/netconf-driver/issues/81)
+  
 ## [0.3.0](https://github.com/IBM/netconf-driver/tree/0.3.0) (2023-08-17)
 [Full Changelog](https://github.com/IBM/netconf-driver/compare/0.2.1...0.3.0)
 
