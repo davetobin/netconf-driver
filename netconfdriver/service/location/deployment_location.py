@@ -85,12 +85,12 @@ class NetConfDeploymentLocation:
 
     def operation(self,package_properties,default_operation,rsa_key_path,request_id):
         response = ConfigOperations.netconf_connect(self.host, self.port, self.username, self.password, rsa_key_path, self.kwargs)
-        ConfigOperations.netconf_lock(response)
+        ConfigOperations.netconf_lock(response, target=self.target)
         edit_config_details = ConfigOperations.netconf_edit(response,package_properties,default_operation, self.target,request_id)        
         # Only candidate datastore configuration are allowed to commit
         if self.target == DATASTORE_CANDIDATE:
             ConfigOperations.netconf_commit(response)
-        ConfigOperations.netconf_unlock(response)
+        ConfigOperations.netconf_unlock(response, target=self.target)
         ConfigOperations.netconf_disconnect(response)
         return edit_config_details
 
