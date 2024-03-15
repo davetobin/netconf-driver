@@ -1,5 +1,10 @@
 # Change Log
 
+## [0.3.2](https://github.com/IBM/netconf-driver/tree/0.3.2) (2024-03-15)
+[Full Changelog](https://github.com/IBM/netconf-driver/compare/0.3.1...0.3.2)
+
+- Fix security vulnerability: CVE-2023-7104 (High) [\#85](https://github.com/IBM/netconf-driver/issues/85)
+
 ## [0.3.1](https://github.com/IBM/netconf-driver/tree/0.3.1) (2023-11-29)
 [Full Changelog](https://github.com/IBM/netconf-driver/compare/0.3.0...0.3.1)
 
