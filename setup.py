@@ -19,6 +19,7 @@ setup(
         'gunicorn==20.1.0',
         'lxml==4.9.1',
         'paramiko==3.4.0',
+        'six==1.16.0',
         'ignition-framework=={0}'.format(_pkg_info['ignition-version'])
     ],
     entry_points='''
