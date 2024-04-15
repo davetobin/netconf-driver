@@ -28,4 +28,4 @@ WORKDIR /home/netconfdriver
 EXPOSE 7139
 
 CMD if [ $SSL_ENABLED | tr [:upper:] [:lower:] == "true" ]; then SSL="--certfile /var/netconfdriver/certs/tls.crt --keyfile /var/netconfdriver/certs/tls.key" ; fi \
-&& gunicorn --workers $NUM_PROCESSES --bind [::]:$DRIVER_PORT $SSL "netconfdriver:create_wsgi_app()"
+&& gunicorn -k uvicorn.workers.UvicornWorker --workers  $NUM_PROCESSES --bind [::]:$DRIVER_PORT $SSL "netconfdriver:create_wsgi_app()"
