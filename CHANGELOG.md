@@ -1,5 +1,11 @@
 # Change Log
 
+## [0.4.0](https://github.com/IBM/netconf-driver/tree/0.4.0) (2024-04-18)
+[Full Changelog](https://github.com/IBM/netconf-driver/compare/0.3.2...0.4.0)
+
+- Security vulnerability (paramiko) [\#90](https://github.com/IBM/netconf-driver/issues/90)
+- Updated Ignition to 3.6.0 that uses connexion 3.0.5 (ASGI) [\#84](https://github.com/IBM/netconf-driver/issues/84)
+
 ## [0.3.2](https://github.com/IBM/netconf-driver/tree/0.3.2) (2024-03-15)
 [Full Changelog](https://github.com/IBM/netconf-driver/compare/0.3.1...0.3.2)
 
